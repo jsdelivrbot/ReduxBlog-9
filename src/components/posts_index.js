@@ -7,13 +7,17 @@ import { fetchPosts } from '../actions';
 
 class PostsIndex extends Component {
 	componentDidMount() {
-		this.props.fetchPosts();
+		if (!this.props.post) {
+			this.props.fetchPosts();
+		}
 	}
 
 	renderPosts() {
 		return _.map(this.props.posts, post => 
 			<li className="list-group-item" key={post.id}>
-				{post.title}
+				<Link to={`/post/${post.id}`}>
+					{post.title}
+				</Link>
 			</li>
 		);
 	}
