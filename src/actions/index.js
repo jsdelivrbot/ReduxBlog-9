@@ -12,41 +12,41 @@ import {
 export function fetchPosts() {
 	const request = axios.get(URL_POSTS);
 	
-	return {
-		type: FETCH_POSTS,
-		payload: request
+	return (dispatch) => {
+		request.then(({ data }) => {
+			dispatch({ type: FETCH_POSTS, payload: data });
+		});
 	};
 }
 
 export function createPost(values, callback) {
-	const request = axios
-		.post(URL_POSTS, values)
-		.then(() => callback())
-	;
-
-	return {
-		type: CREATE_POST,
-		payload: request
+	const request = axios.post(URL_POSTS, values);
+	
+	return (dispatch) => {
+		request.then(({ data }) => {
+			callback();
+			dispatch({ type: CREATE_POST, payload: data });
+		});
 	};
 }
 
 export function fetchPost(id) {
 	const request = axios.get(URL_POST(id));
-
-	return {
-		type: FETCH_POST,
-		payload: request
+	
+	return (dispatch) => {
+		request.then(({ data }) => {
+			dispatch({ type: FETCH_POST, payload: data });
+		});
 	};
 }
 
 export function deletePost(id, callback) {
-	const request = axios
-		.delete(URL_POST(id))
-		.then(() => callback())
-	;
-
-	return {
-		type: DELETE_POST,
-		payload: request
+	const request = axios.delete(URL_POST(id));
+	
+	return (dispatch) => {
+		request.then(({ data }) => {
+			callback();
+			dispatch({ type: DELETE_POST, payload: data });
+		});
 	};
 }
