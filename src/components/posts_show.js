@@ -23,7 +23,7 @@ class PostsShow extends Component {
 		}
 		
 		return (
-			<div>
+			<div className="post">
 				<Link className="btn btn-primary" to="/">Back To Index</Link>
 				<button
 					className="btn btn-danger pull-xs-right"
