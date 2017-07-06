@@ -6,11 +6,11 @@ import { connect } from 'react-redux';
 import { createPost } from '../actions';
 
 const validateTitle = value => {
-			if (!value) {
-				return 'Enter a title!';
-			} else if (value.length < 3) {
-				return 'The title needs at least 3 characters.';
-			}
+	if (!value) {
+		return 'Enter a title!';
+	} else if (value.length < 3) {
+		return 'The title needs at least 3 characters.';
+	}
 };
 
 const validateCategories = value => {
