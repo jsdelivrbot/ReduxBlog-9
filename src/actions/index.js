@@ -1,52 +1,57 @@
-import axios from 'axios';
+import Firebase from 'firebase';
 
 import { 
-	FETCH_POSTS, 
+	FETCH_POSTS,
 	CREATE_POST, 
 	FETCH_POST, 
 	DELETE_POST, 
-	URL_POSTS, 
-	URL_POST 
+	FIREBASE_CONFIG
 } from '../constants/constants';
 
+Firebase.initializeApp(FIREBASE_CONFIG);
+const database = Firebase.database();
+const databaseRef = database.ref();
+
 export function fetchPosts() {
-	const request = axios.get(URL_POSTS);
-	
-	return (dispatch) => {
-		request.then(({ data }) => {
-			dispatch({ type: FETCH_POSTS, payload: data });
-		});
+	return dispatch => {
+		databaseRef.on('value', snapshot => {
+			dispatch({
+				type: FETCH_POSTS,
+				payload: snapshot.val()
+			});
+		});	
 	};
 }
 
 export function createPost(values, callback) {
-	const request = axios.post(URL_POSTS, values);
-	
 	return (dispatch) => {
-		request.then(({ data }) => {
-			callback();
-			dispatch({ type: CREATE_POST, payload: data });
-		});
+		const newKey = databaseRef.child('posts').push().key;
+		const post = values;
+
+		const updates = {};
+		post.id = newKey;
+		updates[`/posts/${newKey}`] = post;
+		databaseRef.update(updates);
+		dispatch({ type: CREATE_POST, payload: post });
+
+		callback();
 	};
 }
 
 export function fetchPost(id) {
-	const request = axios.get(URL_POST(id));
-	
 	return (dispatch) => {
-		request.then(({ data }) => {
-			dispatch({ type: FETCH_POST, payload: data });
+		database.ref(`/posts/${id}`).once('value').then(snapshot => {
+			const post = snapshot.val();
+			post.id = id;
+			dispatch({ type: FETCH_POST, payload: post });
 		});
 	};
 }
 
 export function deletePost(id, callback) {
-	const request = axios.delete(URL_POST(id));
-	
 	return (dispatch) => {
-		request.then(({ data }) => {
-			callback();
-			dispatch({ type: DELETE_POST, payload: data });
-		});
+		database.ref(`/posts/${id}`).remove();
+		dispatch({ type: DELETE_POST, payload: id });
+		callback();
 	};
 }

@@ -1,4 +1,4 @@
-export const DATABASE = {
+export const FIREBASE_CONFIG = {
     apiKey: "#KEY#",
     authDomain: "#AUTH#.firebaseapp.com",
     databaseURL: "https://#URL#.firebaseio.com",
@@ -6,3 +6,8 @@ export const DATABASE = {
     storageBucket: "#BUCKET#.appspot.com",
     messagingSenderId: "#ID#",
 };
+
+export const FETCH_POSTS = 'fetchPosts';
+export const CREATE_POST = 'createPost';
+export const FETCH_POST = 'fetchPost';
+export const DELETE_POST = 'deletePost';
