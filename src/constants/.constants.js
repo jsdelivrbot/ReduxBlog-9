@@ -4,5 +4,5 @@ export const DATABASE = {
     databaseURL: "https://#URL#.firebaseio.com",
     projectId: "#ID#",
     storageBucket: "#BUCKET#.appspot.com",
-    messagingSenderId: "#ID#"
-  };
+    messagingSenderId: "#ID#",
+};
