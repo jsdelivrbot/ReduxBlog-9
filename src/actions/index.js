@@ -1,12 +1,20 @@
 import Firebase from 'firebase';
 
 import { 
+	SELECT_POST,
 	FETCH_POSTS,
 	CREATE_POST, 
 	FETCH_POST, 
 	DELETE_POST, 
 	FIREBASE_CONFIG
 } from '../constants/constants';
+
+export function selectPost(event) {
+	return {
+		type: SELECT_POST,
+		payload: event.target.value
+	};
+}
 
 Firebase.initializeApp(FIREBASE_CONFIG);
 const database = Firebase.database();

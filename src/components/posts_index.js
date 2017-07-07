@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 
-import { fetchPosts } from '../actions';
+import { fetchPosts, selectPost } from '../actions';
+import SelectedPostsList from './selected_posts_list';
 
 class PostsIndex extends Component {
 	componentDidMount() {
@@ -18,6 +19,12 @@ class PostsIndex extends Component {
 				<Link to={`/post/${post.id}`}>
 					{post.title}
 				</Link>
+				<input 
+					type="checkbox" 
+					className="pull-xs-right" 
+					value={post.id} 
+					onClick={(event) => this.props.selectPost(event)} 
+				/> 
 			</li>
 		);
 	}
@@ -35,7 +42,10 @@ class PostsIndex extends Component {
 						Add a Post
 					</Link>
 				</div>
-				<h3>Posts</h3>
+				<h4>Selected Posts</h4>
+				<SelectedPostsList />
+				<hr />
+				<h4>All Posts</h4>
 				<ul className="list-group">
 					{posts}
 				</ul>
@@ -48,4 +58,4 @@ function mapStateToProps(state) {
 	return { posts: state.posts };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts, selectPost })(PostsIndex);

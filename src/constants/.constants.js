@@ -7,6 +7,7 @@ export const FIREBASE_CONFIG = {
     messagingSenderId: "#ID#",
 };
 
+export const SELECT_POST = 'selectPost';
 export const FETCH_POSTS = 'fetchPosts';
 export const CREATE_POST = 'createPost';
 export const FETCH_POST = 'fetchPost';
