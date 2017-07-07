@@ -24,7 +24,7 @@ class PostsIndex extends Component {
 
 	render() {
 		const posts = 
-			Object.keys(this.props.posts).length === 0 ? 
+			_.isEmpty(this.props.posts) ? 
 			<div>There are no posts yet.</div> :
 			this.renderPosts();
 
