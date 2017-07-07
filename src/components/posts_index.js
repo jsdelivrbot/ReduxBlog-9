@@ -23,6 +23,11 @@ class PostsIndex extends Component {
 	}
 
 	render() {
+		const posts = 
+			Object.keys(this.props.posts).length === 0 ? 
+			<div>There are no posts yet.</div> :
+			this.renderPosts();
+
 		return (
 			<div>
 				<div className="text-xs-right">
@@ -32,7 +37,7 @@ class PostsIndex extends Component {
 				</div>
 				<h3>Posts</h3>
 				<ul className="list-group">
-					{this.renderPosts()}
+					{posts}
 				</ul>
 			</div>
 		);
