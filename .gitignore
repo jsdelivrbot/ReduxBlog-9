@@ -9,3 +9,6 @@ npm-debug.log
 
 #Constants
 /src/constants/constants.js
+
+#Prod 
+/web
