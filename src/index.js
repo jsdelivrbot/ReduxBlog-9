@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
@@ -20,7 +20,7 @@ function configureStore(initialState) {
 
 ReactDOM.render(
   <Provider store={configureStore()}>
-    <BrowserRouter>
+    <HashRouter>
       <div>
         <Switch>
           <Route path='/posts/new' component={PostsNew} />
@@ -28,7 +28,7 @@ ReactDOM.render(
           <Route path='/' component={PostsIndex} />
         </Switch>
       </div>
-    </BrowserRouter>
+    </HashRouter>
   </Provider>, 
   document.querySelector('.container')
 );
